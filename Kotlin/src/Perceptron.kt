@@ -1,5 +1,4 @@
 data class Perceptron(val weights: Array<Double>) {
-
     constructor(size: Int):this(generateWeights(size))
 }
 
@@ -38,16 +37,4 @@ fun train(perceptron: Perceptron, matrix: Array<Array<Int>>, learningRate: Float
         }
     } while (i < matrix.size)
     return per
-}
-
-
-fun main(args: Array<String>) {
-    val matrix = readFromFile("input/implies.txt")
-    var perceptron = Perceptron(matrix[0].size -1)
-
-    println(perceptron.weights.contentToString())
-
-    perceptron = train(perceptron, matrix)
-
-    println(perceptron.weights.contentToString())
 }

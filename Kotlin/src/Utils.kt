@@ -1,3 +1,4 @@
+
 import java.io.File
 import java.security.SecureRandom
 
@@ -19,4 +20,3 @@ fun readFromFile(filename: String) = File(filename).readLines()
                                 .map {it.toInt() }
                                 .toTypedArray() }
                         .toTypedArray()
-
