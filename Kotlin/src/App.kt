@@ -1,6 +1,6 @@
 fun main(args: Array<String>)
 {
-  var filename = "or.txt"
+  var filename = "asa.txt"
   if (args.firstOrNull() != null)
     filename = args[0]
 

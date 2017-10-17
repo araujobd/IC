@@ -3,7 +3,7 @@ import java.io.File
 import java.security.SecureRandom
 
 val randomSequence: Sequence<Double> = generateSequence {
-      SecureRandom().nextInt(2) * 2 - 1 }.map(Int::toDouble)
+      SecureRandom().nextDouble() * 2 - 1 }
 
 fun generateWeights(size: Int): Array<Double> = randomSequence
               .take(size)
