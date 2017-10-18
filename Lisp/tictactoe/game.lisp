@@ -55,8 +55,8 @@
 ;; * random-move
 ;; * ai-minimax-move    .obs:. minimax as playero is bugged
 ;; * ai-based-rules-move
-(defvar x (make-instance 'player :mark *X* :move 'random-move ))
-(defvar o (make-instance 'player :mark *O* :move 'ai-based-rules-move ))
+(defvar x (make-instance 'player :mark *X* :move 'ai-minimax-move ))
+(defvar o (make-instance 'player :mark *O* :move 'ai-minimax-move ))
 
 (game x o)
 
