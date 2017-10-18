@@ -16,3 +16,14 @@ fun readFromFile(filename: String) = File(filename)
               .map {it.toInt() }
               .toTypedArray() }
               .toTypedArray()
+
+fun readFromCSVFile(filename: String): Array<Array<Int>> {
+    val file = File(filename)
+    val lines = file.readLines()
+    val s = lines.subList(1, lines.size)
+            .map { it.split(',')
+                    .map { it.toInt() }
+                    .toTypedArray()}
+            .toTypedArray()
+    return s
+}
