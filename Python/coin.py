@@ -1,7 +1,6 @@
 import random
 
 def rand_play(state, p):
-
     a = random.randint(1, min(state, 100 - state))
     if (random.random() <= p):
         s = state + a
@@ -15,7 +14,6 @@ def initialize():
         v[i] = 0
     v[100] = 1
     return v
-
 
 def main():
     alfa = 0.01
