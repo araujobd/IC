@@ -1,5 +1,13 @@
 import random
 
+def save_values(value):
+    save = open('values.csv', 'w')
+    content = []
+    for k, v in value.items():
+        content.append(str(k) + ',' + str(v) + '\n')
+    save.writelines(content)
+    save.close()
+
 def rand_play(state, p):
     a = random.randint(1, min(state, 100 - state))
     if (random.random() <= p):
@@ -28,9 +36,9 @@ def main():
                 value[state] = value[state] + (alfa * aux)
             count = count + 1
     except:
+        save_values(value)
         print(value.items())
         print()
         print(count)
 
 main()
-
