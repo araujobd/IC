@@ -8,6 +8,15 @@ def save_values(value):
     save.writelines(content)
     save.close()
 
+def read_values():
+    try:
+        save = open('values.csv', 'r')
+        lines = save.readlines()
+        print(...)
+    except:
+        return initialize()
+        
+
 def rand_play(state, p):
     a = random.randint(1, min(state, 100 - state))
     if (random.random() <= p):
