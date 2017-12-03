@@ -1,17 +1,17 @@
 import random
 
-def save_values(value, values = 'values.dat'):
-    save = open(values, 'w')
+def save_values(value,  filename = 'values.dat'):
+    save = open(filename, 'w')
     content = []
     for k, v in value.items():
         content.append(str(k) + ' ' + str(v) + '\n')
     save.writelines(content)
     save.close()
 
-def read_values(values = 'values.dat'):
+def read_values(filename = 'values.dat'):
     print('read_values')
     try:
-        save = open(values, 'r')
+        save = open(filename, 'r')
         lines = save.readlines()
         value = {}
         for i in lines:
