@@ -1,6 +1,6 @@
 import random
 
-def save_values(value, values = 'values.csv'):
+def save_values(value, values = 'values.dat'):
     save = open(values, 'w')
     content = []
     for k, v in value.items():
@@ -8,25 +8,27 @@ def save_values(value, values = 'values.csv'):
     save.writelines(content)
     save.close()
 
-def read_values(values = 'values.csv'):
+def read_values(values = 'values.dat'):
+    print('read_values')
     try:
         save = open(values, 'r')
         lines = save.readlines()
-
         value = {}
         for i in lines:
             k, v = i.strip().split(' ')
             value[int(k)] = float(v)
-        #print(...)
+        print('open')
+        return value
     except:
+        print('initialize')
         return initialize()
 
 def rand_play(state, p):
-    a = random.randint(1, min(state, 100 - state))
-    if (random.random() >= p):
-        s = state + a
+    action = random.randint(1, min(state, 100 - state))
+    if (random.random() <= p):
+        s = state + action
     else:
-        s = state - a
+        s = state - action
     return s
 
 def best_play(value, state):
@@ -40,7 +42,7 @@ def generate_graph(value):
     aux = {}
     for i in range(1, 100):
         aux[i] = best_play(value, i)
-    save_values(aux, 'graph.csv')
+    save_values(aux, 'graph.dat')
 
 def initialize():
     v = {}
@@ -51,8 +53,8 @@ def initialize():
 
 def main():
     alfa = 0.01
-    p = 0.4
-    value = initialize()
+    p = 0.6
+    value = read_values()
     count = 0
     try:
         while(True):
