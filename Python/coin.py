@@ -1,3 +1,4 @@
+import time
 import random
 
 def save_values(value,  filename = 'values.dat'):
@@ -21,24 +22,30 @@ def read_values(filename = 'values.dat'):
         return initialize()
 
 def rand_play(state, p):
-    action = random.randint(1, min(state, 100 - state))
+    action = random.randint(1, state)
     if (random.random() <= p):
         s = state + action
     else:
         s = state - action
+    if (s > 100):
+        s = 100
     return s
 
-def best_play(value, state):
-    best = 1
-    for i in range(1, min(state, (100 - state))):
-        if (value[i] >= value[best]):
-            best = i
-    return best
+# possiveis casos ponderados    
+def best_play(value, state, p):
+    best = 0
+    ind = 1
+    for i in range(1, state+1):
+        v = p * value[(i + state) % 101] + (1 - p) * value[state - i]
+        if (v > best):
+            best = v
+            ind = i
+    return ind
 
-def generate_graph(value):
+def generate_graph(value, p):
     aux = {}
     for i in range(1, 100):
-        aux[i] = best_play(value, i)
+        aux[i] = best_play(value, i, p)
     save_values(aux, 'graph.dat')
 
 def initialize():
@@ -49,20 +56,23 @@ def initialize():
     return v
 
 def main():
-    alfa = 0.01
-    p = 0.6
+    alfa = 0.001
+    p = 0.4
     value = read_values()
     count = 0
+    random.seed(time.time())
     try:
         while(True):
-            for state in range(1, 100):
+            states = range(1, 100)
+            random.shuffle(states)
+            for state in states:
                 next_state = rand_play(state, p)
                 aux = value[next_state] - value[state]
                 value[state] = value[state] + (alfa * aux)
             count += 1
     except:
         save_values(value)
-        generate_graph(value)
+        generate_graph(value, p)
         print(count)
 
 main()
