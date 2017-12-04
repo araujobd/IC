@@ -9,7 +9,6 @@ def save_values(value,  filename = 'values.dat'):
     save.close()
 
 def read_values(filename = 'values.dat'):
-    print('read_values')
     try:
         save = open(filename, 'r')
         lines = save.readlines()
@@ -17,10 +16,8 @@ def read_values(filename = 'values.dat'):
         for i in lines:
             k, v = i.strip().split(' ')
             value[int(k)] = float(v)
-        print('open')
         return value
     except:
-        print('initialize')
         return initialize()
 
 def rand_play(state, p):
